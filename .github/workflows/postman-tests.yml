@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   api-tests:
     runs-on: ubuntu-latest
@@ -25,10 +29,14 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
       - name: Login to Postman CLI
+        if: env.POSTMAN_API_KEY != ''
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
       - name: Run API tests
         run: |
+          mkdir -p results
           postman collection run jsonplaceholder-tests.json \
             --reporters cli,junit \
             --reporter-junit-export results/junit-report.xml
@@ -46,3 +54,4 @@ jobs:
         with:
           report_paths: results/junit-report.xml
           fail_on_failure: true
+          include_passed: true
