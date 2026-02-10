@@ -1,0 +1,4 @@
+postman-cli-reports/
+results/
+node_modules/
+.DS_Store
