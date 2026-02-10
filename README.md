@@ -106,6 +106,11 @@ postman-test-pipeline/
 └── README.md                        # This file
 ```
 
+## Pipeline Run Links
+
+- **Successful run:** https://github.com/danielshively-source/postman-test-pipeline/actions/runs/21846693504
+- **Failed run (then fixed):** https://github.com/danielshively-source/postman-test-pipeline/actions/runs/21846666250
+
 ## Links
 
 - **API under test**: https://jsonplaceholder.typicode.com
